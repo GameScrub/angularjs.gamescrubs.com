@@ -1,0 +1,26 @@
+﻿<form name="modalStatusForm" ng-submit="submitForm()" novalidate>
+    
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Change Bracket Status</h4>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="form-horizontal padding-15">
+          
+            <div forminput>
+                <label for="Status">Status</label>
+                <select id="Status" name="Status" ng-model="bracket.Status" required ng-options="convertToInt(k) as v for (k, v) in Enum.BracketStatus"></select>
+            </div>
+
+        </div>     
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+
+   
+</form>

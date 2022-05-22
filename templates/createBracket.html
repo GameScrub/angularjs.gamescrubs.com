@@ -1,0 +1,85 @@
+﻿<form name="createBracketForm" ng-submit="submitForm()" novalidate>
+    
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Create Bracket</h4>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="form-horizontal padding-15">
+          
+            <div forminput>
+                <label for="Name" >Name</label>
+                <input type="text" id="Name" name="Name" placeholder="Bracket Name" ng-model="bracket.Name" required/>
+            </div>
+
+            <div forminput>
+                <label for="Game" >Game</label>
+                <input type="text" id="Game" name="Game" placeholder="Name of Game" ng-model="bracket.Game" required>
+            </div>
+
+            <div forminput>
+                <label for="Url" >Url</label>
+                <input type="text" id="Url" name="Url" placeholder="Website that might be promoting this tournament" ng-model="bracket.Url">
+            </div>
+
+            <div forminput>
+                <label for="Email" >Email</label>
+                <input type="text" id="Email" name="Email" placeholder="Email in case lock code is forgotten" ng-model="bracket.Email">
+            </div>
+
+            <div forminput>
+                <label for="Type" >Type</label>
+                <select  id="Type" name="Type" aria-invalid="false" ng-model="bracket.Type">
+                    <option value="0">8 Single Elimination</option>
+                    <option value="1">16 Single Elimination</option>
+                    <option value="2">32 Single Elimination</option>
+                    <option value="3">8 Double Elimination</option>
+                    <option value="4">16 Double Elimination</option>
+                    <option value="5">32 Double Elimination</option>
+                </select>
+
+            </div>
+
+            <div forminput>
+                <label for="Competition">Competition</label>
+                <select id="Competition" name="Competition" aria-invalid="false" ng-model="bracket.Competition" required>
+                    <option value="0">Video Game</option>
+                    <option value="1">Sport</option>
+                    <option value="2">Board Game</option>
+                    <option value="3">Other</option>
+                </select>
+            </div>
+
+            <div forminput>
+                <label for="StartDate">StartDate</label>
+                <div class="input-prepend input-group">
+                    <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="StartDate" name="StartDate" value="" ng-model="bracket.StartDate"/>
+                </div>
+            </div>
+
+            <div forminput>
+                <input id="isLocked" name="isLocked" type="checkbox" ng-model="bracket.isLocked">
+            </div>
+
+            <div forminput>
+                <label for="LockCode">Lock Code</label>
+                <input type="text" id="LockCode" name="LockCode" placeholder="Lock Code" ng-model="bracket.LockCode">
+            </div>
+
+
+        </div>
+
+     
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+
+</form>

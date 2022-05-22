@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html ng-app="gamescrubs">
+<head>
+    <base href="/">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Single or double eliminiation tournament brackets.">
+    <meta name="keywords" content="brackets, tournaments, games, competition, tournament, bracket, single, double, elimination"/>
+
+    <title>GameScrubs</title>
+
+    <link href="lib/font-awesome.min.css" rel="stylesheet" />
+    <link href="lib/bootstrap-spacelab.css" rel="stylesheet" />
+
+    <link href="lib/datepicker/angular-datepicker.min.css" rel="stylesheet" />
+    <link href="lib/sweetalert/sweetalert.css" rel="stylesheet" />
+    
+      
+    <!-- AngularJS-->      
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-resource.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>        
+    <script src="lib/ui-bootstrap-tpls.js"></script>
+    <script src="lib/datepicker/angular-datepicker.min.js"></script>    
+    <script src="lib/angular-drag-and-drop-lists.min.js"></script>
+    <script src="lib/sweetalert/sweetalert.min.js"></script>    
+    <script src="lib/sweetalert.js"></script>
+    <script src="lib/angular-environment.min.js"></script>
+    <script src="lib/ngstorage.js"></script>    
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.signalr-2.2.0.min.js"></script>
+
+    
+
+    <style type="text/css">
+        input.ng-touched.ng-invalid {
+        	border: 2px #ff0000 solid;
+        }              
+    </style>
+
+    <script src="app.js"></script>
+    
+</head>
+
+<body>
+  
+
+    <!-- Navbar
+     ================================================== -->
+    <div class="bs-docs-section clearfix" style="padding-left:15px; padding-right:15px; padding-top:5px;">
+        <div class="row">
+            <div class="col-lg-12">
+               
+
+                <div class="bs-component">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">                                
+                                <a class="navbar-brand" href="#/home">GameScrubs</a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">                                    
+                                    <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                                        <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bracket <span class="caret"></span></a>
+                                        <ul uib-dropdown-menu class="dropdown-menu" role="menu">                                            
+                                            <li><a href="#" ng-click="openModal()">Create New Bracket</a></li>                                            
+                                            <li><a href="#/bracket">View List of Brackets</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                                <search></search>     
+                                                        
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+        
+    <div class="container-fluid">
+
+       
+        <ui-view></ui-view>
+    </div>
+
+    <!-- Start Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <hr />
+                <p style="padding-left:15px; padding-right:15px;">
+                    Copyright &copy; 2016 <a href="#" target="_blank">GameScrubs</a> All rights reserved. - <environment></environment>
+                    <span class="pull-right">Design and Developed by <a href="#" target="_blank">Rafael Artigas</a></span>
+                </p>                
+            </div>
+        </div>
+
+    </footer>
+
+   
+</body>
+
+
+</html>

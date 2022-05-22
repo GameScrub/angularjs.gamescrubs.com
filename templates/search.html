@@ -1,0 +1,9 @@
+﻿
+<form id="bracket-search" class="navbar-form navbar-right">
+    <div class="form-group">
+        <input type="text" class="form-control" id="searchbox" name="query" placeholder="Search" required="" ng-model="query" ng-keypress="($event.which === 13)?search(query):0">
+        <span class="searchbutton" ng-click="search(query)"><i class="fa fa-search"></i></span>
+    </div>                        
+</form>
+
+

@@ -1,0 +1,73 @@
+﻿
+<img src="img/ring-alt.gif" ng-show="!brackets" />
+
+
+         
+<div class="panel panel-primary"  ng-show="brackets" ng-init="searchBracket(query)">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Tournaments List</h3>
+    </div>
+
+    <div class="panel-body table-responsive">
+        <table id="bracketList" class="table table-hover">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Competition</th>
+                <th>Game</th>
+                <th>Web site url</th>
+                <th>Players</th>
+                <th>Bracket Type</th>
+                <th>Status</th>
+                <th class="text-center">View Bracket</th>
+                <th class="text-center">Players</th>
+                <th class="text-center">Results</th>
+                <th class="text-center">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="b in brackets">
+                <td>
+                    <i class="fa fa-lock" ng-if="b.isLocked"></i>
+                    <i class="fa fa-unlock" ng-if="!b.isLocked"></i>
+                </td>
+                <td>{{b.Name}}</td>
+                <td>{{Enum.CompetitionType[b.Competition]}}</td>
+                <td>{{b.Game}}</td>
+                <td>{{b.Url}}</td>
+                <td>{{b.Players.length}}</td>
+                <td>{{Enum.BracketType[b.Type]}}</td>
+                <td>
+                    <span class="label label-warning" ng-show="b.Status == 0">Setup</span>
+                    <span class="label label-default" ng-show="b.Status == 1">In Progress</span>                                
+                    <span class="label label-red" ng-show="b.Status == 2">On Hold</span>                                
+                    <span class="label label-info" ng-show="b.Status == 3">Completed</span>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-icon btn-success" href="#/bracket/view/{{b.ID}}" ui-sref="view({id: b.ID})">
+                        <i class="fa fa-sitemap"></i>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a  class="btn btn-icon btn-info" href="#/bracket/players/{{b.ID}}" ui-sref="players({id: b.ID})">
+                        <i class="fa fa-group"></i>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="#/bracket/results/{{b.ID}}" ui-sref="results({id: b.ID})" class="btn btn-icon btn-warning">
+                        <i class="fa fa-flag-checkered"></i>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a ng-click="validateLockCode(b.ID, b.isLocked)"  class="btn  btn-icon btn-primary input-lock-code">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    

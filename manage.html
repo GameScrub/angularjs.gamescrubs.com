@@ -1,0 +1,164 @@
+﻿<style>
+    .pointer {
+        cursor:pointer;
+    }
+</style>
+<div class="row">
+
+    <div class="col-md-12 col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bracket Manager</h3>
+            </div>
+
+            <div class="panel-body">
+                <div ng-show="brackets.Status == 0">
+                    <blockquote>
+                        <p>
+                            The bracket is currently in setup mode. In this mode you can edit the bracket information, add players and sort them. Click the start bracket button below
+                            to set the bracket to In Progress and start the bracket.  Please note that once the bracket is in progress you can't add or sort players.
+                        </p>
+                    </blockquote>
+
+                    <a class="btn btn-primary" ng-click="startBracket()">
+                        <i class="fa fa-paper-plane"></i>
+                        Start Bracket
+                    </a>
+                </div>
+
+                <div ng-show="brackets.Status > 0">
+                    <blockquote>
+                        <p>
+                            The bracket is currently IN PROGRESS.  Press the button below if the bracket is finished and no more changes will be made to this bracket.
+                        </p>
+                    </blockquote>
+
+                    <a class="btn btn-primary" ng-click="completeBracket()">
+                        <i class="fa fa-flag-checkered"></i>
+                        Complete Bracket
+                    </a>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+               
+            </div>
+
+        </div>
+    </div>    
+</div>
+
+
+<div class="row" ng-init="manage(id)">
+        
+    <!-- Start Panel -->
+    <div class="col-md-4 col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+               Details
+
+                <span uib-dropdown on-toggle="toggled(open)" class="pull-right pointer">
+                    <span id="simple-dropdown " uib-dropdown-toggle>
+                        <i class="fa fa-cog"></i> Options<span class="caret"></span>
+                    </span>
+                  
+                    <ul class="dropdown-menu text-primary" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                        <li ng-click="openStatusModal()">Change Status</li>
+                        <li ng-click="openBracketModal()">Edit Information</li>
+                        <li ng-click="deleteBracket(brackets.ID)">Delete Bracket</li>
+                    </ul>
+                </span>
+
+                
+            </div>
+
+            <div class="panel-body">
+                <dl>
+                    <dt>Name</dt>
+                    <dd>{{brackets.Name}}</dd>
+
+                    <dt>Game</dt>
+                    <dd>{{brackets.Game}}</dd>
+
+                    <dt>Site Url</dt>
+                    <dd>{{brackets.Url}}</dd>
+
+                    <dt>Email</dt>
+                    <dd>{{brackets.Email}}</dd>
+
+                    <dt>Bracket Type</dt>
+                    <dd>{{Enum.BracketType[brackets.Type]}}</dd>
+
+                    <dt>Competition</dt>
+                    <dd>{{Enum.CompetitionType[brackets.Competition]}}</dd>
+
+                    <dt>Status</dt>
+                    <dd>{{Enum.BracketStatus[brackets.Status]}}</dd>
+
+                    <dt>Start Date</dt>
+                    <dd>{{brackets.StartDate | date:"MM/dd/yyyy"}}</dd>
+
+                    <dt>Is Locked</dt>
+                    <dd>{{brackets.isLocked}}</dd>
+                </dl>
+            </div>
+
+      
+
+        </div>
+    </div>
+    <!-- End Panel -->
+    <!-- Start Panel -->
+    <div class="col-md-8">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Players
+                    <span class="badge">
+                        <i class="fa fa-unlock" ng-show="brackets.Status == 0"></i>
+                        <i class="fa fa-lock" ng-show="brackets.Status > 0"></i>
+                    </span>
+                </h3>
+
+            </div>
+
+            <div class="panel-body">
+
+                <!-- Player List -->
+                <ul class="list-group"
+                    dnd-list="brackets.Players"
+                    dnd-drop="">
+
+                    <li class="list-group-item" ng-repeat="player in brackets.Players"
+                        dnd-draggable="player"
+                        dnd-moved="brackets.Players.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = player"
+                        ng-class="{'selected': models.selected === player}"
+                        dnd-dragend="order(event, index, item, external, type, 'containerType')">
+
+                        <i ng-show="brackets.Status == 0" class="fa fa-sort"></i>&nbsp;
+                        {{player.PlayerName}}
+
+                        <span class="pull-right">
+                            <a class="btn btn-xs btn-primary edit-btn" ng-click="openPlayerModal(player)" ng-show="brackets.Status == 0"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-xs btn-danger delete-btn" ng-click="deletePlayer(player)" ng-show="brackets.Status == 0"><i class="fa fa-trash"></i></a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel-footer">
+                <input type="button" ng-click="openPlayerModal()" ng-hide="brackets.Players.length >= maxPlayers()" value="Add" class="btn btn-primary">
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End Panel -->
+
+
+
+</div>
+

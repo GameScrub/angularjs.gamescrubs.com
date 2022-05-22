@@ -1,0 +1,79 @@
+﻿<form name="modalBracketForm" ng-submit="submitForm()" novalidate>
+    
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Manage Bracket</h4>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="form-horizontal padding-15">
+          
+            <div forminput>
+                <label for="Name">Name</label>
+                <input type="text" id="Name" name="Name" placeholder="Bracket Name" ng-model="bracket.Name" required autofocus/>
+                <span ng-show="modalBracketForm.Name.$touched && modalBracketForm.Name.$invalid">The name is required.</span>
+            </div>
+
+            <div forminput>
+                <label for="Game">Game</label>
+                <input type="text" id="Game" name="Game" placeholder="Type of Game" ng-model="bracket.Game" required>
+                <span ng-show="modalBracketForm.Game.$touched && modalBracketForm.Game.$invalid">The type of game is required.</span>
+            </div>
+
+            <div forminput>
+                <label for="Url">Url</label>
+                <input type="text" id="Url" name="Url" placeholder="Website that might be promoting this tournament" ng-model="bracket.Url">
+            </div>
+
+            <div forminput>
+                <label for="Email">Email</label>
+                <input type="email" id="Email" name="Email" placeholder="Email in case lock code is forgotten" ng-model="bracket.Email">
+                <span ng-show="modalBracketForm.$error.email">Invalid email address.</span>
+            </div>
+
+            <div forminput>
+                <label for="Type">Type</label>
+                <select  id="Type" name="Type" ng-model="bracket.Type"  ng-options="convertToInt(k) as v for (k, v) in Enum.BracketType" required>
+                </select>                
+            </div>
+
+            <div forminput>                
+                <label for="Competition">Competition </label>
+                <select id="Competition" name="Competition" ng-model="bracket.Competition" required  ng-options="convertToInt(k) as v for (k, v) in Enum.CompetitionType">
+                </select>
+            </div>
+
+            <div forminput>
+                <label for="StartDate">StartDate</label>                                                 
+                <datepicker date-format="MM/dd/yyyy" selector="form-control">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="cursor: pointer">
+                            <i class="fa fa-lg fa-calendar"></i>
+                        </span>
+                        <input type="text" name="StartDate" ng-model="bracket.StartDate" class="form-control" required placeholder="Choose a date"/>                        
+                    </div>
+                    <span ng-show="modalBracketForm.StartDate.$touched && modalBracketForm.StartDate.$invalid">Start Date is required</span>                
+                </datepicker>      
+                
+            </div>
+
+            <div forminput>
+                <input id="isLocked" name="isLocked" type="checkbox" ng-model="bracket.isLocked">
+            </div>
+
+            <div forminput>
+                <label for="LockCode">Lock Code</label>
+                <input type="password" id="LockCode" name="LockCode" placeholder="Lock Code" ng-model="bracket.LockCode" ng-required="bracket.isLocked">
+                <span ng-show="modalBracketForm.LockCode.$touched && modalBracketForm.LockCode.$invalid">Lock code required if bracket is locked.</span>                
+            </div>
+        </div>     
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="modalBracketForm.$invalid">Submit</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+
+   
+</form>
